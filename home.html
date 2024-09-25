@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Membershipship</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-900">
+    <div class="container mx-auto p-4">
+        <h1 class="text-4xl font-bold mb-4">Memberships</h1>
+        <h2>List of memberships</h2>
+
+        <table class="table-auto mt-8 bg-gray-200">
+            <thead>
+                <tr class="bg-gray-500 pt-2 pb-2">
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Address</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="p-4 pl-8">Benoit Tigeot</td>
+                    <td class="p-4 pl-8">benoit.tigeot@gmail.com</td>
+                    <td class="p-4 pl-8">+33612345678</td>
+                    <td class="p-4 pl-8">1 rue de la paix, 75001 Paris</td>
+                    <td class="p-4 pr-8">
+                        <a href="/edit/benoit.tigeot" class="text-blue-500 hover:underline mx-2">edit</a>
+                        <a href="/delete/benoit.tigeot" class="text-red-500 hover:underline mr-2">delete</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
