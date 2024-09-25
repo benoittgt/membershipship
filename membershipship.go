@@ -20,18 +20,7 @@ type Member struct {
 }
 
 type Page struct {
-	Title   string
-	Body    []byte
 	Members []Member
-}
-
-func loadPage(title string) (*Page, error) {
-	filename := title + ".txt"
-	body, err := os.ReadFile(filename)
-	if err != nil {
-		return nil, err
-	}
-	return &Page{Title: title, Body: body}, nil
 }
 
 func parseDate(dateStr string) (time.Time, error) {
@@ -41,7 +30,6 @@ func parseDate(dateStr string) (time.Time, error) {
 		"1/2/2006",   // M/D/YYYY
 		"02/1/2006",  // DD/M/YYYY
 		"2/01/2006",  // D/MM/YYYY
-		"2006",       // YYYY
 	}
 
 	dateStr = strings.TrimSpace(dateStr)
@@ -111,11 +99,7 @@ func fetchMemberData() ([]Member, error) {
 }
 
 func viewHomeHandler(w http.ResponseWriter, r *http.Request) {
-	p, err := loadPage("home")
-	if err != nil {
-		http.Redirect(w, r, "/", http.StatusFound)
-		return
-	}
+	p := &Page{}
 
 	members, err := fetchMemberData()
 	if err != nil {
