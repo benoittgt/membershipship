@@ -14,24 +14,27 @@
         <table class="table-auto mt-8 bg-gray-200">
             <thead>
                 <tr class="bg-gray-500 pt-2 pb-2">
-                    <th>Name</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
                     <th>Email</th>
-                    <th>Phone</th>
-                    <th>Address</th>
+                    <th>Join Date</th>
+                    <th>Expiration Date</th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
+                {{range .Members}}
                 <tr>
-                    <td class="p-4 pl-8">Benoit Tigeot</td>
-                    <td class="p-4 pl-8">benoit.tigeot@gmail.com</td>
-                    <td class="p-4 pl-8">+33612345678</td>
-                    <td class="p-4 pl-8">1 rue de la paix, 75001 Paris</td>
+                    <td class="p-4 pl-8">{{.FirstName}}</td>
+                    <td class="p-4 pl-8">{{.LastName}}</td>
+                    <td class="p-4 pl-8">{{.Email}}</td>
+                    <td class="p-4 pl-8">{{.JoinDate.Format "2006-01-02"}}</td>
+                    <td class="p-4 pl-8">{{.ExpirationDate.Format "2006-01-02"}}</td>
                     <td class="p-4 pr-8">
-                        <a href="/edit/benoit.tigeot" class="text-blue-500 hover:underline mx-2">edit</a>
-                        <a href="/delete/benoit.tigeot" class="text-red-500 hover:underline mr-2">delete</a>
+                        <a href="/card/generate?firstName={{.FirstName}}&lastName={{.LastName}}&ExpirationDate={{.ExpirationDate.Format "2006-01-02"}}" class="text-blue-500 hover:underline mr-2">generate card</a>
                     </td>
                 </tr>
+                {{end}}
             </tbody>
         </table>
     </div>
