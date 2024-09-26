@@ -78,7 +78,7 @@ func readCSVFromUrl(url string) ([]Member, error) {
 	return members, nil
 }
 
-func renderTemplate(w http.ResponseWriter, tmpl string, p *Page) {
+func renderHtmlTemplate(w http.ResponseWriter, tmpl string, p *Page) {
 	t, err := template.ParseFiles(tmpl + ".html")
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -109,10 +109,62 @@ func viewHomeHandler(w http.ResponseWriter, r *http.Request) {
 
 	p.Members = members
 
-	renderTemplate(w, "home", p)
+	renderHtmlTemplate(w, "home", p)
+}
+
+func renderJsonTemplate(firstName, lastName, expirationDate string) (string, error) {
+	templateFile := "./google_card.json"
+	templateBytes, err := os.ReadFile(templateFile)
+	if err != nil {
+		return "", fmt.Errorf("error reading JSON template file: %v", err)
+	}
+	templateStr := string(templateBytes)
+
+	data := struct {
+		FirstName      string
+		LastName       string
+		ExpirationDate string
+	}{
+		FirstName:      firstName,
+		LastName:       lastName,
+		ExpirationDate: expirationDate,
+	}
+	tmpl, err := template.New("jsonTemplate").Parse(templateStr)
+	if err != nil {
+		return "", fmt.Errorf("error parsing JSON template: %v", err)
+	}
+
+	var renderedTemplate strings.Builder
+	err = tmpl.Execute(&renderedTemplate, data)
+	if err != nil {
+		return "", fmt.Errorf("error rendering JSON template: %v", err)
+	}
+
+	return renderedTemplate.String(), nil
+}
+
+func generateGoogleCardHandler(w http.ResponseWriter, r *http.Request) {
+	query := r.URL.Query()
+	firstName := query.Get("firstName")
+	lastName := query.Get("lastName")
+	expirationDate := query.Get("ExpirationDate")
+
+	jsonPayload, err := renderJsonTemplate(firstName, lastName, expirationDate)
+	if err != nil {
+		http.Error(w, "Error generating JSON payload: "+err.Error(), http.StatusInternalServerError)
+		return
+	}
+	fmt.Fprintln(w, jsonPayload)
+}
+
+func generateAppleCardHandler(w http.ResponseWriter, r *http.Request) {
+	http.Error(w, "Not implemented yet", http.StatusNotImplemented)
 }
 
 func main() {
 	http.HandleFunc("/", viewHomeHandler)
+	http.HandleFunc("/card/generate_google", generateGoogleCardHandler)
+	http.HandleFunc("/card/generate_apple", generateAppleCardHandler)
+	fmt.Println("Listening http://localhost:8080")
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }

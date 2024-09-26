@@ -30,8 +30,13 @@
                     <td class="p-4 pl-8">{{.Email}}</td>
                     <td class="p-4 pl-8">{{.JoinDate.Format "2006-01-02"}}</td>
                     <td class="p-4 pl-8">{{.ExpirationDate.Format "2006-01-02"}}</td>
-                    <td class="p-4 pr-8">
-                        <a href="/card/generate?firstName={{.FirstName}}&lastName={{.LastName}}&ExpirationDate={{.ExpirationDate.Format "2006-01-02"}}" class="text-blue-500 hover:underline mr-2">generate card</a>
+                    <td class="p-4">
+                        <button onclick="window.location.href='/card/generate_google?firstName={{.FirstName}}&lastName={{.LastName}}&ExpirationDate={{.ExpirationDate.Format "2006-01-02"}}'" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-3 rounded mr-2">
+                            Google Card
+                        </button>
+                        <button onclick="window.location.href='/card/generate_apple?firstName={{.FirstName}}&lastName={{.LastName}}&ExpirationDate={{.ExpirationDate.Format "2006-01-02"}}'" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-3 rounded mr-2">
+                            Apple Card
+                        </button>
                     </td>
                 </tr>
                 {{end}}
