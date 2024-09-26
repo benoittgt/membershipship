@@ -23,6 +23,24 @@ type Page struct {
 	Members []Member
 }
 
+const baseUrl = "https://walletobjects.googleapis.com/walletobjects/v1"
+
+func googleApplicationCredentials() (string, error) {
+	credentials := os.Getenv("GOOGLE_APPLICATION_CREDENTIALS")
+	if credentials == "" {
+		return "", fmt.Errorf("GOOGLE_APPLICATION_CREDENTIALS environment variable is not set")
+	}
+	return credentials, nil
+}
+
+func googleClassId() (string, error) {
+	classId := os.Getenv("GOOGLE_CLASS_ID")
+	if classId == "" {
+		return "", fmt.Errorf("GOOGLE_CLASS_ID environment variable is not set")
+	}
+	return classId, nil
+}
+
 func parseDate(dateStr string) (time.Time, error) {
 	layouts := []string{
 		"02/01/2006", // DD/MM/YYYY
@@ -155,6 +173,10 @@ func generateGoogleCardHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	fmt.Fprintln(w, jsonPayload)
+}
+
+func generateGoogleCard(jsonPayload string) (string, error) {
+	return "", nil
 }
 
 func generateAppleCardHandler(w http.ResponseWriter, r *http.Request) {
