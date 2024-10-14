@@ -81,8 +81,7 @@ func readCSVFromUrl(url string) ([]Member, error) {
 		}
 		joinDate, err := parseDate(row[5]) // Assuming join date is in column 6
 		if err != nil {
-			log.Printf("Error parsing join date for row %d: %v. Using current date instead.", i, err)
-			joinDate = time.Now() // Use current date as a fallback
+			panic(fmt.Errorf("Error parsing join date for row %d: %v", i, err))
 		}
 		member := Member{
 			FirstName:      strings.TrimSpace(row[1]),
@@ -190,3 +189,6 @@ func main() {
 	fmt.Println("Listening http://localhost:8080")
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
+			if err != nil {
+				panic(fmt.Errorf("Error parsing join date for row %d: %v", i, err))
+			}

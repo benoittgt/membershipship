@@ -1,57 +1,57 @@
 {
-    "id": "ISSUER_ID.OBJECT_ID",
-    "classId": "ISSUER_ID.GENERIC_CLASS_ID",
-    "logo": {
-      "sourceUri": {
-        "uri": "https://storage.googleapis.com/wallet-lab-tools-codelab-artifacts-public/pass_google_logo.jpg"
-      },
-      "contentDescription": {
-        "defaultValue": {
-          "language": "en-US",
-          "value": "LOGO_IMAGE_DESCRIPTION"
-        }
-      }
+  "id": "ISSUER_ID.OBJECT_ID",
+  "classId": "ISSUER_ID.GENERIC_CLASS_ID",
+  "logo": {
+    "sourceUri": {
+      "uri": "https://i.imgur.com/E91VzmV.jpeg"
     },
-    "cardTitle": {
+    "contentDescription": {
       "defaultValue": {
         "language": "en-US",
-        "value": "Nantes Beer Club 2024-2025"
+        "value": "LOGO_IMAGE_DESCRIPTION"
       }
+    }
+  },
+  "cardTitle": {
+    "defaultValue": {
+      "language": "en-US",
+      "value": "Nantes Beer Club - Adhésion 2024/2025"
+    }
+  },
+  "subheader": {
+    "defaultValue": {
+      "language": "en-US",
+      "value": "Membre"
+    }
+  },
+  "header": {
+    "defaultValue": {
+      "language": "en-US",
+      "value": "Willy la frite"
+    }
+  },
+  "textModulesData": [
+    {
+      "id": "valide_jusqu'au",
+      "header": "Valide jusqu'au",
+      "body": "1/12/2025"
+    }
+  ],
+  "barcode": {
+    "type": "TEXT_ONLY",
+    "value": "BARCODE_VALUE",
+    "alternateText": "Valable chez Amère, Lab, Bières Etonnantes, Aerofab"
+  },
+  "hexBackgroundColor": "#b8b8b8",
+  "heroImage": {
+    "sourceUri": {
+      "uri": "https://i.imgur.com/xA9F9ll.png"
     },
-    "subheader": {
+    "contentDescription": {
       "defaultValue": {
         "language": "en-US",
-        "value": "Membre"
-      }
-    },
-    "header": {
-      "defaultValue": {
-        "language": "en-US",
-        "value": "{{ .FirstName }} {{ .LastName }}"
-      }
-    },
-    "textModulesData": [
-      {
-        "id": "date_d'expiration",
-        "header": "Date d'expiration",
-        "body": "{{ .ExpirationDate }}"
-      }
-    ],
-    "barcode": {
-      "type": "BARCODE_TYPE_UNSPECIFIED",
-      "value": "BARCODE_VALUE",
-      "alternateText": ""
-    },
-    "hexBackgroundColor": "#463aa1",
-    "heroImage": {
-      "sourceUri": {
-        "uri": "https://storage.googleapis.com/wallet-lab-tools-codelab-artifacts-public/google-io-hero-demo-only.png"
-      },
-      "contentDescription": {
-        "defaultValue": {
-          "language": "en-US",
-          "value": "HERO_IMAGE_DESCRIPTION"
-        }
+        "value": "HERO_IMAGE_DESCRIPTION"
       }
     }
   }
+}
